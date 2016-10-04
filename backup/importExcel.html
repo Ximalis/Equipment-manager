@@ -1,0 +1,75 @@
+<link rel="stylesheet" href="/bootstrap.min.css">
+<div class="panel panel-primary panel-margin">
+    <div class="panel-heading">Выберите файл Excel</div>
+    <div class="panel-body bgr">
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Обзор:</label>
+                <input id="upload" type="file" name="userfile" onchange="getName(this.value);"/>
+            </div>
+            <button type="submit" class="btn btn-default">Подтвердить</button>
+        </form>
+    </div>
+</div>
+
+<div class="panel panel-default panel-margin">
+    <div class="panel-heading">Пример заполнения Excel файла для импорта в систему</div>
+    <div class="panel-body bgr" id="test">
+       
+        <input type="button" value="Показать" class="btn btn-primary btn-position" style="position: absolute;" id="butn"/>
+    </div>
+</div>
+<script type="text/javascript">
+    function appendImg(src)
+    {
+        var c = document.getElementById("test");
+        if(c.getElementsByTagName("img").length > 0){
+            return;
+        }
+        var _img = document.createElement('img');
+        _img.src = 'excelExample.jpg';
+
+        this.inElement = function (element_id)
+        {
+            var _el = document.getElementById(element_id);
+            _el.appendChild(_img);
+        };
+
+        return this;
+    }
+
+    window.onload = function ()
+    {
+        var btn = document.getElementById('butn');
+
+        btn.onclick = function ()
+        {
+            appendImg('test.jpg').inElement('test');
+        }
+    }
+
+    function getName(str) {
+        if (str.lastIndexOf('\\')) {
+            var i = str.lastIndexOf('\\') + 1;
+        }
+        else {
+            var i = str.lastIndexOf('/') + 1;
+        }
+        var filename = str.slice(i);
+        var uploaded = document.getElementById("fileformlabel");
+        uploaded.innerHTML = filename;
+    }
+</script>
+<style type="text/css">
+html {
+    padding: 5px;
+}
+
+.panel-margin {
+    min-height: 105px;
+}
+
+.bgr {
+    background-color: rgba(245, 255, 250, 0.7);
+}
+</style>

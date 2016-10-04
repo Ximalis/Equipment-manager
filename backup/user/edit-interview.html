@@ -1,0 +1,34 @@
+		<?php $interview = $html['interview']; ?>
+		<form method="post" action="?action=show_contact&id=<?= $interview['contact_id'] ?>">
+			<input name="id" type="hidden" value="<?= $interview['id'] ?>" />
+			<div class="form-group">
+				<label for="interview-date-time">Дата и время</label>
+				<input name="date-time" id="interview-date-time" value="<?= date_format(new DateTime($interview['date_time']), 'Y-m-d H:i') ?>" class="form-control date-time-picker"/>
+			</div>
+			<div class="form-group">
+				<label for="interview-goal">Цель</label>
+				<textarea name="goal" id="interview-goal" class="form-control" rows="5"><?= htmlspecialchars($interview['goal']) autofocus?></textarea>
+			</div>
+			<div class="form-group">
+				<label for="interview-result">Результат</label>
+				<textarea name="result" id="interview-result" class="form-control" rows="5"><?= htmlspecialchars($interview['result']) ?></textarea>
+			</div>
+
+			<hr/>
+			<?php if ($pox->userType == 1) { ?>
+			<div class="form-group">
+				<label for="interview-owner">Владелец записи</label>
+				<select name="owner_id" id="interview-owner" class="form-control input-sm">
+					<?php
+						$users = $html['users'];
+						foreach ($users as $user) {
+							$user_id = $user['id']; ?>
+							<option value="<?= $user_id ?>" <?= ($user_id == $interview['owner_id'] ? 'selected' : '') ?> >
+								<?= htmlspecialchars($user['name']) ?>
+							</option>
+					<?php } ?>
+				</select>
+			</div>
+<?php }?>
+			<input type="submit" name="submit" value="Редактировать" style="margin: 5px 5px 15px 5px" class="btn btn-default" />
+		</form>

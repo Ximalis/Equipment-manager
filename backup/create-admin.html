@@ -1,0 +1,27 @@
+<form>
+  <div class="form-group wdth">
+    <input type="hidden" name="action" value="create-admin">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Имя:</label>
+    <input name="name" value="<?=(isset($_REQUEST['name']) ? $_REQUEST['name'] : '')?>" maxlength="<?=Pox::NAME_MAX_LENGTH?>" class="form-control" id="pwd">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Пароль:</label>
+    <input type="password" class="form-control" name="password" id="pwd">
+  </div>
+  <div class="form-group">
+    <label for="pwd">Повторите пароль:</label>
+    <input type="password" name="repeat_password" class="form-control" id="pwd">
+  </div>
+  <button type="submit" class="btn btn-default">Создать</button>
+</form>
+<style type="text/css">
+	html {
+		padding: 20px;
+	}
+
+	.wdth {
+		width: 500px;
+	}
+</style>

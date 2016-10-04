@@ -1,0 +1,44 @@
+<form method="POST">
+<?php 
+function declOfNum($count1, $titles)
+{
+    $cases = array (2, 0, 1, 1, 1, 2);
+    return $count1." ".$titles[ ($count1%100>4 && $count1%100<20)? 2 : $cases[min($count1%10, 5)] ];
+}
+echo '<h4 style="margin-left: 10px;" class="no-print">В таблице '.declOfNum($count1, array('запись.</h4>', 'записи.</h4>', 'записей.</h4>'));
+?>
+	<table class="tablesorter table table-bordered" style="vertical-align: middle; text-align: center;">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Имя</th>
+                <th>Пароль</th>
+                <th>Тип</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php
+            foreach ($html['users'] as $user) { ?>
+            <tr>
+                <td><a href="?action=show_user&id=<?= $user['id'] ?>" /> <?= $user['id'] ?> </a></td>
+                <td><a href="?action=show_user&id=<?= $user['id'] ?>" /> <?= htmlspecialchars($user['name']) ?> </a></td>
+                <td><a href="?action=show_user&id=<?= $user['id'] ?>" /> <?= htmlspecialchars($user['password']) ?> </a></td>
+                <td><a href="?action=show_user&id=<?= $user['id'] ?>" /> <? if (htmlspecialchars($user['type']) == 1) {echo "Администратор";}else {echo "Пользователь";}  ?> </a></td>
+                <?php if ($_SESSION['user_id'] || $pox->userType == 1) { ?>
+					<td class="no-print"><a class="btn btn-sm btn-info no-print" href="?action=edit_user&id=<?= $user['id'] ?>" />Редактировать</a></td>
+					<td class="no-print"><input type="checkbox" class="no-print" name="user-ids[]" value="<?= $user['id'] ?>"/></td>
+                <?php } ?>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+
+    <input type="submit" name="remove-users" value="Удалить отмеченные" class="btn btn-danger pull-right no-print" />
+</form>
+<style type="text/css">
+    th {
+     text-align: center;
+    }
+  </style>
+<a class="btn btn-info no-print" href="?action=create_user">Добавить нового пользователя</a>

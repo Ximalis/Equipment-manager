@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>JavaScript MD5</title>
+	<script type="text/javascript" src="jshash-2.2/md5.js"></script>
+	
+	<script type="text/javascript">
+	function generateMD5(){
+		var str = document.generateMD5Form.str.value;
+		var md5 = hex_md5(str);
+		document.generateMD5Form.md5.value = md5;
+	}
+	</script>
+</head>
+<body>
+	<form name="generateMD5Form">
+		<p>Строка: <input type="text" name="str" value="" placeholder="Введите или скопируйте новый пароль в это поле" size="100" /></p>
+		<p>
+			<input type="button" onClick="generateMD5()" value="Вычислить MD5" />
+			MD5-хэш: <input type="text" name="md5" value="" size="50" />
+		</p>
+	</form>
+	<hr/>
+	<p>
+		<small>
+			
+		</small>
+	</p>
+</body>
+</html>

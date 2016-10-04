@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+<style type="text/css">
+    .input-margin {
+        margin-bottom: 10px;
+    }
+    .input-margin:last-child {
+        margin-bottom: 0;
+    }
+    .container-margin {
+        margin: 0 auto;
+    }
+    .page-header {
+        border:0;
+    }
+    body{
+        background-image: url("images/bg.png");
+    }
+</style>
+<div class="container container-margin">
+    <div class="row">
+        <div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-3 col-lg-4 col-lg-offset-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"style="text-align: center;">Авторизация</h3>
+                </div>
+                <div class="panel-body " style="background-color: #f5f5f5">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 login-box">
+                            <form role="form" method="post" >
+                                <div class="input-group input-margin">
+                                    <input type="hidden" name="action" value="login" />
+                                    <span class="input-group-addon ">
+                                        <span class="glyphicon glyphicon-user"></span>
+                                    </span>
+                                    <input type="text" class="form-control" name="name" placeholder="Имя пользователя"
+                                           value="<?=(isset($_REQUEST['name']) ? $_REQUEST['name'] : '')?>"
+                                           maxlength="<?=Pox::NAME_MAX_LENGTH?>" required autofocus />
+                                </div>
+                                <div class="input-group input-margin">
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-lock"></span>
+                                    </span>
+                                    <input type="password" class="form-control" placeholder="Пароль" name="password" required />
+                                </div>
+                                <div class="input-group col-xs-12 col-sm-12 col-md-12 input-margin">
+                                    <button type="submit" class="btn btn-labeled btn-success col-xs-12 col-sm-12 col-md-12">
+                                        <span class="btn-label">
+                                            <i class="glyphicon"></i>
+                                        </span>
+                                        Войти
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

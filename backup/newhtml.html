@@ -1,0 +1,52 @@
+<a href="./index.php" style="position:absolute; top:10px;" class="knopka">Вернуться на главную</a>
+<h1 style="text-align:center;">Резервное копирование базы данных выполнено успешно.</h1>
+<form name="redirect">
+    <center>
+        <font face="Arial"><b>Вы перейдете на другую страницу через<br><br>
+            <form>
+                <input type="text" size="3" name="redirect2">
+            </form>>
+            секунд</b></font>
+    </center>
+</form>    
+    <script>
+        var targetURL = "./index.php"
+        var countdownfrom = 99999
+        var currentsecond = document.redirect.redirect2.value = countdownfrom + 1
+
+        function countredirect() {
+            if (currentsecond != 1) {
+                currentsecond -= 1
+                document.redirect.redirect2.value = currentsecond
+            }
+            else {
+                window.location = targetURL
+                return
+            }
+            setTimeout("countredirect()", 1000)
+        }
+        countredirect()
+    </script>
+    <style type="text/css">
+        body {
+        background: rgba(196,193,146,1);
+        background: -moz-radial-gradient(center, ellipse cover, rgba(196,193,146,1) 0%, rgba(195,169,127,1) 100%);
+        background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(196,193,146,1)), color-stop(100%, rgba(195,169,127,1)));
+        background: -webkit-radial-gradient(center, ellipse cover, rgba(196,193,146,1) 0%, rgba(195,169,127,1) 100%);
+        background: -o-radial-gradient(center, ellipse cover, rgba(196,193,146,1) 0%, rgba(195,169,127,1) 100%);
+        background: -ms-radial-gradient(center, ellipse cover, rgba(196,193,146,1) 0%, rgba(195,169,127,1) 100%);
+        background: radial-gradient(ellipse at center, rgba(196,193,146,1) 0%, rgba(195,169,127,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c4c192', endColorstr='#c3a97f', GradientType=1 );
+        }
+        a.knopka {
+        font-family: Helvetica, sans-serif;
+        color: #fff; /* цвет текста */
+        text-decoration: none; /* убирать подчёркивание у ссылок */
+        user-select: none; /* убирать выделение текста */
+        background: #2E8CE3; /* фон кнопки */
+        padding: .7em 1.5em; /* отступ от текста */
+        outline: none; /* убирать контур в Mozilla */
+        } 
+        a.knopka:hover { background: rgb(232,95,76); } /* при наведении курсора мышки */
+        a.knopka:active { background: rgb(152,15,0); } /* при нажатии */
+    </style>

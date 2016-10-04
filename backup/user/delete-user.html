@@ -1,0 +1,36 @@
+<form method="POST">
+<table class="tablesorter table table-bordered">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Имя</th>
+                <th>Пароль</th>
+                <th>Тип</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php
+            foreach ($html['users'] as $user) { ?>
+            <tr>
+                <td><a href="?action=show_user&id=<?= $user['id'] ?>" /> <?= $user['id'] ?> </a></td>
+                <td><a href="?action=show_user&id=<?= $user['id'] ?>" /> <?= htmlspecialchars($user['name']) ?> </a></td>
+                <td><a href="?action=show_user&id=<?= $user['id'] ?>" /> <?= htmlspecialchars($user['password']) ?> </a></td>
+                <td><a href="?action=show_user&id=<?= $user['id'] ?>" /> <?= htmlspecialchars($user['type']) ?> </a></td>
+                <?php if ($user['owner_id'] == $_SESSION['user_id'] || $pox->userType == 1) { ?>
+					<td class="no-print"><a class="btn btn-sm btn-info no-print" href="?action=edit_user&id=<?= $user['id'] ?>" />Редактировать</a></td>
+					<td class="no-print"><input type="checkbox" class="no-print" name="user-ids[]" value="<?= $user['id'] ?>"/></td>
+                <?php } ?>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+
+    <input type="submit" name="remove-users" style="margin-right:5px; margin-bottom:10px;" value="Удалить отмеченные" style="margin-right: 5px;" class="btn btn-danger pull-right no-print" />
+</form>
+<style type="text/css">
+    th {
+     text-align: center;
+    }
+  </style>
+<a class="btn btn-info no-print" style="margin-left:5px; margin-bottom:10px;" href="?action=create_user">Добавить пользователя</a>

@@ -1,0 +1,50 @@
+<form method="POST">
+<?php 
+function declOfNum($count1, $titles)
+{
+    $cases = array (2, 0, 1, 1, 1, 2);
+    return $count1." ".$titles[ ($count1%100>4 && $count1%100<20)? 2 : $cases[min($count1%10, 5)] ];
+}
+echo '<h4 style="margin-left: 10px;" class="no-print">В таблице '.declOfNum($count1, array('запись.</h4>', 'записи.</h4>', 'записей.</h4>'));
+?>
+	<table class="tablesorter table table-bordered">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Название</th>
+                <th>Год выпуска</th>
+                <th>Формат</th>
+                <th>Кол-во отт-в</th>
+                <th>Комплектация</th>
+                <th>Сто-сть</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <?php
+            foreach ($html['equipments'] as $equip) { ?>
+            <tr>
+                <td><a href="?action=show_equip&id=<?= $equip['id'] ?>" /> <?= $equip['id'] ?> </a></td>
+                <td><a href="?action=show_equip&id=<?= $equip['id'] ?>" /> <?= htmlspecialchars($equip['title']) ?> </a></td>
+                <td><a href="?action=show_equip&id=<?= $equip['id'] ?>" /> <?= htmlspecialchars($equip['year']) ?> </a></td>
+                <td><a href="?action=show_equip&id=<?= $equip['id'] ?>" /> <?= htmlspecialchars($equip['size']) ?> </a></td>
+                <td><a href="?action=show_equip&id=<?= $equip['id'] ?>" /> <?= htmlspecialchars($equip['stamp']) ?> </a></td>
+                <td><a href="?action=show_equip&id=<?= $equip['id'] ?>" /> <?= htmlspecialchars($equip['comp']) ?> </a></td>
+                <td><a href="?action=show_equip&id=<?= $equip['id'] ?>" /> <?= htmlspecialchars($equip['price']) ?> </a></td>
+                <?php if ($equip['owner_id'] == $_SESSION['user_id'] || $pox->userType == 1) { ?>
+					<td class="no-print"><a class="btn btn-sm btn-info no-print" href="?action=edit_equip&id=<?= $equip['id'] ?>" />Редактировать</a></td>
+					<td class="no-print"><input type="checkbox" class="no-print" name="equip-ids[]" value="<?= $equip['id'] ?>"/></td>
+                <?php } ?>
+            </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+
+    <input type="submit" name="remove-equipments" style="margin-right:5px; margin-bottom:10px;" value="Удалить отмеченные" style="margin-right: 5px;" class="btn btn-danger pull-right no-print" />
+</form>
+<style type="text/css">
+    th {
+     text-align: center;
+    }
+  </style>
+<a class="btn btn-info no-print" style="margin-left:5px; margin-bottom:10px;" href="?action=create_equip">Добавить оборудование</a>

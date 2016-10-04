@@ -1,0 +1,35 @@
+<html>
+<HEAD>
+<META http-equiv=content-type content="text/html; charset=windows-1251">
+</HEAD>
+<body >
+<br><br><br><br><br>
+<center><h2>Пользователи</h2></center>
+<table align="center"border=1>
+<tr align="center">
+<td>Id</td>
+<td>Логин</td>
+<td>Пароль</td>
+</tr>
+<?php
+$link = mysql_connect("localhost", "root","")
+      or die("Could not connect");
+mysql_select_db("product") or die("Could not select database");
+
+$link = mysqli_connect("localhost","vad","qwerty","pox") or die("Error " . mysqli_error($link)); 
+
+$query="SELECT * FROM people ";
+
+$result = mysql_query($query) or die("Query failed");
+while ($line = mysql_fetch_row($result)) { 
+print "<tr align=\"center\"><td>$line[1]</td>";
+print "<td>$line[2]</td>";
+print "<td>$line[3]</td>";
+$st=$line[2]*$line[3];
+print "<td>$st</td>";
+print "<td>$line[4]</td></tr>";
+
+} ?>
+</table>
+</body>
+</html>

@@ -1,0 +1,15 @@
+		<?php $interview = $html['interview']; ?>
+		<table class="table table-bordered">
+			<tr>
+				<th class="col-md-2">Дата и время</th>
+				<td><?= date_format(new DateTime($interview['date_time']), 'Y-m-d H:i') ?></td>
+			</tr>
+			<tr>
+				<th>Цель</th>
+				<td><?= htmlspecialchars($interview['goal']) ?></td>
+			</tr>
+			<tr>
+				<th>Результат</th>
+				<td><?= htmlspecialchars($interview['result']) ?></td>
+			</tr>
+		</table>

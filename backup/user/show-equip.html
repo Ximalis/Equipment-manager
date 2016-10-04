@@ -1,0 +1,70 @@
+		<?php $equip = $html['equip']; ?>
+		<form method="POST">
+			<table class="table table-bordered">
+				<tr>
+					<th class="col-md-2">Название</th>
+					<td><?= htmlspecialchars($equip['title']) ?></td>
+				</tr>
+				<tr>
+					<th>Год выпуска</th>
+					<td><?= htmlspecialchars($equip['year']) ?></td>
+				</tr>
+                                <tr>
+					<th>Формат</th>
+					<td><?= htmlspecialchars($equip['size']) ?></td>
+				</tr>
+                                <tr>
+					<th>Количество оттисков</th>
+					<td><?= htmlspecialchars($equip['stamp']) ?></td>
+				</tr>
+                                <tr>
+					<th>Комплектация</th>
+					<td><?= htmlspecialchars($equip['comp']) ?></td>
+				</tr>
+				<tr>
+					<th>Стоимость</th>
+					<td><?= htmlspecialchars($equip['price']) ?></td>
+				</tr>
+
+			</table>
+			<table class="tablesorter table table-bordered">
+				<caption style="color: grey; font-size: 2.5em">Контакты оборудования</caption>
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Фамилиия</th>
+						<th>Имя</th>
+						<th>Отчество</th>
+						<th>Интерес</th>
+						<th>Телефон</th>
+						<th>Почта</th>
+						<th>Skype</th>
+						<th>Другое</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<?php
+						foreach ($html['contacts'] as $contact) { ?>
+						<tr>
+							<td><a href="?action=show_contact&id=<?= $contact['id'] ?>" /><?= $contact['id'] ?></a></td>
+							<td><a href="?action=show_contact&id=<?= $contact['id'] ?>" /><?= htmlspecialchars($contact['last_name']) ?></a></td>
+							<td><a href="?action=show_contact&id=<?= $contact['id'] ?>" /><?= htmlspecialchars($contact['first_name']) ?></a></td>
+							<td><a href="?action=show_contact&id=<?= $contact['id'] ?>" /><?= htmlspecialchars($contact['middle_name']) ?></a></td>
+							<td><a href="?action=show_contact&id=<?= $contact['id'] ?>" /><?= htmlspecialchars($contact['interest']) ?></a></td>
+							<td><a href="?action=show_contact&id=<?= $contact['id'] ?>" /><?= htmlspecialchars($contact['telephone']) ?></a></td>
+							<td><a href="?action=show_contact&id=<?= $contact['id'] ?>" /><?= htmlspecialchars($contact['email']) ?> </a></td>
+							<td><a href="?action=show_contact&id=<?= $contact['id'] ?>" /><?= htmlspecialchars($contact['skype']) ?></a></td>
+							<td><a href="?action=show_contact&id=<?= $contact['id'] ?>" /><?= htmlspecialchars($contact['other']) ?></a></td>
+							<?php if ($contact['owner_id'] == $_SESSION['user_id'] || $pox->userType == 1) { ?>
+								<td><a class="btn btn-sm btn-info no-print" href="?action=edit_contact&id=<?= $contact['id'] ?>" />Редактировать</a></td>
+								<td><input type="checkbox" class="no-print" name="contact-ids[]" value="<?= $contact['id'] ?>"/></td>
+							<?php } ?>
+						</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+
+			<input type="submit" name="remove-contacts" value="Удалить отмеченные" style="margin-right: 5px;" class="btn btn-danger pull-right no-print" />
+		</form>
+		<a style="margin-left: 5px;" class="btn btn-info no-print" href="?action=create_contact&equip_id=<?= $equip['id'] ?>">Добавить контакт</a>

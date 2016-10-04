@@ -1,0 +1,68 @@
+		<?php $contact = $html['contact']; ?>
+
+		<form method="POST">
+			<table class="table table-bordered">
+				<tr>
+					<th class="col-md-2">Фамилиия</th>
+					<td><?= htmlspecialchars($contact['last_name']) ?></td>
+				</tr>
+				<tr>
+					<th>Имя</th>
+					<td><?= htmlspecialchars($contact['first_name']) ?></td>
+				</tr>
+				<tr>
+					<th>Отчество</th>
+					<td><?= htmlspecialchars($contact['middle_name']) ?></td>
+				</tr>
+				<tr>
+					<th>Телефон</th>
+					<td><?= htmlspecialchars($contact['telephone']) ?></td>
+				</tr>
+				<tr>
+					<th>Почта</th>
+					<td><?= htmlspecialchars($contact['email']) ?></td>
+				</tr>
+				<tr>
+					<th>Skype</th>
+					<td><?= htmlspecialchars($contact['skype']) ?></td>
+				</tr>
+				<tr>
+					<th>Другое</th>
+					<td><?= $contact['other'] ?></td>
+				</tr>
+			</table>
+
+			<table class="tablesorter table table-bordered">
+				<caption style="color: grey; font-size: 2.5em">Беседы контакта</caption>
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Дата и время</th>
+						<!--<th>Дата</th>-->
+						<!--<th>Время</th>-->
+						<th>Цель</th>
+						<th>Результат</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<?php
+						foreach ($html['interviews'] as $interview) { ?>
+						<tr>
+							<td><a href="?action=show_interview&id=<?= $interview['id'] ?>" /><?= $interview['id'] ?></a></td>
+							<td><a href="?action=show_interview&id=<?= $interview['id'] ?>" /><?= date_format(new DateTime($interview['date_time']), 'Y-m-d H:i') ?></a></td>
+							<td><a href="?action=show_interview&id=<?= $interview['id'] ?>" /><?= htmlspecialchars($interview['goal']) ?></a></td>
+							<td><a href="?action=show_interview&id=<?= $interview['id'] ?>" /><?= htmlspecialchars($interview['result']) ?></a></td>
+							<?php if ($interview['owner_id'] == $_SESSION['user_id'] || $pox->userType == 1) { ?>
+								<td><a class="btn btn-sm btn-info no-print" href="?action=edit_interview&id=<?= $interview['id'] ?>" />Редактировать</a></td>
+								<td><input type="checkbox" class="no-print" name="interview-ids[]" value="<?= $interview['id'] ?>"/></td>
+							<?php } ?>
+						</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+
+			<input type="submit" name="remove-interviews" value="Удалить отмеченные" style="margin-right: 5px;" class="btn btn-danger pull-right no-print" />
+		</form>
+
+		<a class="btn btn-info no-print" style="margin-left:5px;" href="?action=create_interview&contact_id=<?= $contact['id'] ?>">Добавить беседу</a>

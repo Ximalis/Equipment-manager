@@ -1,0 +1,66 @@
+<div class="no-print">
+    <?php if ($pox->userType > 0) { //если кто-то залогинен ?>
+    <?php if ($pox->userType == 1) { ?>
+    <div class="panel panel-primary panel-shadow">
+        <div class="panel-heading">Функции администратора</div>
+        <div class="panel-body bgr">
+            <button id="admin_edit_users" class="btn btn-primary">Редактировать пользователей</button>&nbsp;
+            <!--<button id="admin_create_user" class="btn btn-primary" >Создать пользователя</button>&nbsp;
+            <button id="admin_export_db" class="btn btn-info">Экспорт БД</button>&nbsp;
+            <button id="admin_editpeople" class="btn btn-info">Редактировать пользователей</button>&nbsp;
+            <button id="admin_import_table_from_excel" class="btn btn-info">Импорт из Excel</button>&nbsp;-->
+            <button id="admin_test_export" class="btn btn-info">Создать копию БД</button>&nbsp;
+            <button id="admin_test_importexcel" class="btn btn-info">Импорт</button>&nbsp;
+        </div>
+    </div>
+    <?php }
+    $breadcrumbs = $html['breadcrumbs'];
+    $bc_equip_id = @$breadcrumbs[0];
+    $bc_contact_id = @$breadcrumbs[1];
+    ?>
+    <?php if ($pox->userType > 0) { ?>
+    <div class="panel panel-default panel-shadow">
+        <div class="panel-heading">Функции пользователя</div>
+        <div class="panel-body bgr">
+
+            <ol class="breadcrumb">
+                <li><a class="btn btn-primary" href="?action=show_equipments">Список оборудования</a></li>
+
+                <?php if (isset($bc_equip_id)) { ?>
+                <li><a href="?action=show_equipments&id=<?= $bc_equip_id ?>">Оборудование <?= $bc_equip_id ?></a></li>
+
+                <?php if (isset($bc_contact_id)) { ?>
+                <li><a href="?action=show_contact&id=<?= $bc_contact_id ?>">Контакт <?= $bc_contact_id ?></a></li>
+                <?php }
+                } ?>
+                <div class="col-xs-6 col-sm-5 col-md-5 col-lg-3 search-position">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="search_query" placeholder="Поиск&hellip;" name="serch1" autofocus>
+                    <span class="input-group-btn">
+                        <button type="button" name="search" id="search_btn" class="btn btn-default">Искать</button>
+                    </span>
+                    </div>
+                </div>
+            </ol>
+            <input type="button" class="btn btn-info" onclick="location.href = './index.php'" value="На главную "/>
+            <input type="button" class="btn btn-info" onclick="print_page();" value="Напечатать страницу" />
+            <script type="text/javascript">
+                function print_page() {
+                    window.print();
+                }
+                $('input[name="serch1"]').keypress(function (event) {
+                    if (event.which === 13) {
+                        var v = document.getElementById("search_query").value;
+                        window.location = '?action=search_results&name=' + v;
+                        event.stopPropagation();
+                    }
+                });
+
+
+            </script>
+            <a href="?action=logout" class="btn btn-warning exit-button">ВЫХОД</a>
+        </div>
+    </div>
+
+    <?php }} ?>
+</div>

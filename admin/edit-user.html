@@ -1,0 +1,31 @@
+<?php $user = $html['user']; ?>
+<form method="post" action="?action=edit_user">
+    <input name="id" type="hidden" value="<?= $user['id'] ?>" />
+    <div class="form-group">
+        <label for="user-name">Имя</label>
+        <input name="name" value="<?= htmlspecialchars($user['name']) ?>" id="user-name" class="form-control" autofocus/>
+    </div>
+    <div class="form-group">
+        <label for="user-password">Пароль</label>
+        <input name="password" value="<?= htmlspecialchars($user['password']) ?>" id="user-password" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="user-type">Тип</label>
+        <input name="type" value="<?= htmlspecialchars($user['type']) ?>" id="user-type" class="form-control"/>
+    </div>
+    <hr/>
+    <div class="form-group">
+        <label for="equip-owner">Владелец записи</label>
+        <select name="owner_id" id="equip-owner" class="form-control input-sm">
+            <?php
+            $users = $html['users'];
+            foreach ($users as $user) {
+            $user_id = $user['id']; ?>
+            <option value="<?= $user_id ?>" <?= ($user_id == $equip['owner_id'] ? 'selected' : '') ?> >
+            <?= htmlspecialchars($user['name']) ?>
+            </option>
+            <?php } ?>
+        </select>
+    </div>
+    <input type="submit" name="submit" value="Отправить" style="margin: 5px 5px 15px 5px" class="btn btn-default"/>
+</form>

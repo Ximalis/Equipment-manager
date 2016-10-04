@@ -1,0 +1,43 @@
+<?php $equip = $html['equip']; ?>
+<form method="post" action="?action=show_equipments">
+    <input name="id" type="hidden" value="<?= $equip['id'] ?>" />
+    <div class="form-group">
+        <label for="equip-title">Название</label>
+        <input name="title" value="<?= htmlspecialchars($equip['title']) ?>" id="equip-title" class="form-control" autofocus/>
+    </div>
+    <div class="form-group">
+        <label for="equip-year">Год выпуска</label>
+        <input name="year" value="<?= htmlspecialchars($equip['year']) ?>" id="equip-year" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="equip-size">Формат</label>
+        <input name="size" value="<?= htmlspecialchars($equip['size']) ?>" id="equip-size" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="equip-stamp">Количество оттисков</label>
+        <input name="stamp" value="<?= htmlspecialchars($equip['stamp']) ?>" id="equip-stamp" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="equip-comp">Комплектация</label>
+        <input name="comp" value="<?= htmlspecialchars($equip['comp']) ?>" id="equip-stamp" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="equip-price">Стоимость</label>
+        <input name="price" value="<?= htmlspecialchars($equip['price']) ?>" id="equip-price" class="form-control"/>
+    </div>
+    <hr/>
+    <div class="form-group">
+        <label for="equip-owner">Владелец записи</label>
+        <select name="owner_id" id="equip-owner" class="form-control input-sm">
+            <?php
+            $users = $html['users'];
+            foreach ($users as $user) {
+            $user_id = $user['id']; ?>
+            <option value="<?= $user_id ?>" <?= ($user_id == $equip['owner_id'] ? 'selected' : '') ?> >
+                    <?= htmlspecialchars($user['name']) ?>
+        </option>
+        <?php } ?>
+    </select>
+</div>
+<input type="submit" name="submit" value="Отправить" style="margin: 5px 5px 15px 5px" class="btn btn-default"/>
+</form>

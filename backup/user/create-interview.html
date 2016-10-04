@@ -1,0 +1,16 @@
+		<?php $contact = $html['contact']; ?>
+		<form method="post" action="?action=show_contact&id=<?= $contact['id'] ?>">
+			<div class="form-group">
+				<label for="interview-date-time">Дата и время</label>
+				<input name="date-time" id="interview-date-time" class="form-control date-time-picker" value="<?= date_format(new DateTime(), 'Y-m-d H:i') ?>"/>
+			</div>
+			<div class="form-group">
+				<label for="interview-goal">Цель</label>
+				<textarea name="goal" id="interview-goal" class="form-control" rows="5" autofocus ></textarea>
+			</div>
+			<div class="form-group">
+				<label for="interview-result">Результат</label>
+				<textarea name="result" id="interview-result" class="form-control" rows="5"></textarea>
+			</div>
+			<input type="submit" name="submit" value="Добавить" class="btn btn-default"/>
+		</form>

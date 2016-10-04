@@ -1,0 +1,54 @@
+		<?php $contact = $html['contact']; ?>
+		<form method="post" action="?action=show_equip&id=<?= $contact['equip_id'] ?>">
+			<input name="id" type="hidden" value="<?= $contact['id'] ?>" />
+			<div class="form-group">
+				<label for="contact-last-name">Фамилия</label>
+				<input name="last-name" value="<?= htmlspecialchars($contact['last_name']) ?>" id="contact-last-name" class="form-control" autofocus />
+			</div>
+			<div class="form-group">
+				<label for="contact-first-name">Имя</label>
+				<input name="first-name" value="<?= htmlspecialchars($contact['first_name']) ?>" id="contact-first-name" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="contact-middle-name">Отчество</label>
+				<input name="middle-name" value="<?= htmlspecialchars($contact['middle_name']) ?>" id="contact-middle-name" class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="contact-interest">Интерес</label>
+				<textarea name="interest" id="contact-interest" class="form-control" rows="2"/><?= htmlspecialchars($contact['interest']) ?></textarea>
+			</div>
+			<div class="form-group">
+				<label for="contact-telephone">Телефон</label>
+				<input name="telephone" value="<?= htmlspecialchars($contact['telephone']) ?>" id="contact-telephone" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="contact-email">Почта</label>
+				<input name="email" value="<?= htmlspecialchars($contact['email']) ?>" id="contact-email" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="contact-skype">Skype</label>
+				<input name="skype" value="<?= htmlspecialchars($contact['skype']) ?>" id="contact-skype" class="form-control"/>
+			</div>
+			<div class="form-group">
+				<label for="contact-other">Другое</label>
+				<input name="other" value="<?= htmlspecialchars($contact['other']) ?>" id="contact-other" class="form-control"/>
+			</div>
+
+			<hr />
+			<?php if ($pox->userType == 1) { ?>
+			<div class="form-group">
+				<label for="contact-owner">Владелец записи</label>
+				<select name="owner_id" id="contact-owner" class="form-control input-sm">
+					<?php
+						$users = $html['users'];
+						foreach ($users as $user) {
+							$user_id = $user['id']; ?>
+							<option value="<?= $user_id ?>" <?= ($user_id == $contact['owner_id'] ? 'selected' : '') ?> >
+								<?= htmlspecialchars($user['name']) ?>
+							</option>
+					<?php } ?>
+				</select>
+			</div>
+			<?php }?>
+			<input type="submit" name="submit" value="Редактировать" style="margin: 5px 5px 15px 5px" class="btn btn-default" />
+		</form>
